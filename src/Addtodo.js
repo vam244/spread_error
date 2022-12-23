@@ -1,13 +1,17 @@
 import React from 'react'
-// import {v4 as uuidv4} from uuid
-function Addtodo({title,desc,settitle,setdesc,todos,settodos}) {
+function Addtodo({title,desc,settitle,setdesc,settodos,todos}) {
   const create_todo=(event)=>{
     event.preventDefault()
-  settodos(...todos,{id:todos.length,title:title,desc:desc})
+  settodos(prevstate=>{
+    console.log(prevstate.length+1)
+    return [...prevstate,{id:prevstate.length+1,title:title,desc:desc}]
+  })
     setdesc("")
     settitle("")
-    console.log(todos.length)
+    
+   
 }
+
   const ontitlechange=(event)=>{
     settitle(event.target.value)
     
@@ -15,6 +19,7 @@ function Addtodo({title,desc,settitle,setdesc,todos,settodos}) {
   const ondeschange=(event)=>{
     setdesc(event.target.value)
   }
+  
   return (
     <div>
         <div className="mb-3">
